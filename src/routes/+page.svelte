@@ -1,37 +1,18 @@
 <script lang="ts">
-	const pyramid = (stars: number) => {
-		const element = '*';
-
-		let pyramid: string[] = [];
-
-		for (let i = 0; i < stars; i++) {
-			pyramid.push(element.repeat(i + 1));
-		}
-
-		for (let i = stars; i > 0; i--) {
-			pyramid.push(element.repeat(i));
-		}
-
-		console.log(pyramid);
-
-		console.log('f');
-	};
-
-	const recPyr: any = (starCount: number, acc: string[] = []) => {
-		if (starCount === 0) {
-			return acc;
-		}
-		let tempString = '*'.repeat(starCount);
-
-		return recPyr(starCount - 1, [...acc, '*'.repeat(starCount)]);
-	};
-
-	const p1 = [...recPyr(5).reverse(), ...recPyr(5)];
-
-	const p1String = p1.join('\n');
+    /** @type {import('./$types').PageData} */
+    import weatherTypes from '$lib/weatherTypes';
+	export let data;
+    const time = data.item.current.is_day === 1 ? "day" : "night";
+    const weatherType = data.item.current.weather_code;
+    const image = weatherTypes[1][time].image;
+    const weatherDescription = weatherTypes[weatherType][time].description;
+    console.log(weatherTypes[weatherType]);
 </script>
 
-<button on:click={() => pyramid(5)}>star</button>
+<main>
+    
+	<div>{data.item.current.temperature_2m}{data.item.current_units.temperature_2m}</div>
+    <div>{time}</div>
+    <img src="{image}"/>
 
-<button on:click={() => console.log(recPyr(5))}>rec</button>
-⭐
+</main>
