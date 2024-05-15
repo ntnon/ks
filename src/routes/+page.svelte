@@ -1,10 +1,10 @@
 <script lang="ts">
 	/** @type {import('./$types').PageData} */
+
 	import weatherTypes from '$lib/weatherTypes';
-
 	export let data;
-	const time = data.item.current.is_day === 1 ? 'day' : 'night';
 
+	const time = data.item.current.is_day === 1 ? 'day' : 'night';
 	const weatherType = data.item.current.weather_code;
 	const image = weatherTypes[1][time].image;
 </script>
